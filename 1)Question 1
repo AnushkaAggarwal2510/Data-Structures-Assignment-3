@@ -1,0 +1,95 @@
+Question 1) Develop a menu driven program demonstrating the following operations on a Stack using array:
+            (i) push(), (ii) pop(), (iii) isEmpty(), (iv) isFull(), (v) display(), and (vi) peek().
+
+
+Answer 1)
+
+#include <iostream>
+using namespace std;
+
+#define MAX 5
+int stack[MAX], top= -1;
+
+void push(int x) {
+    if (top == MAX-1) {
+        cout << "Stack Overflow! Cannot push " << x << endl;
+    } else {
+        stack[++top] = x;
+        cout << x << " pushed into stack." << endl;
+    }
+}
+void pop() {
+    if (top == -1) {
+        cout << "Stack Underflow! Nothing to pop." << endl;
+    } else {
+        cout << stack[top--] << " popped from stack." << endl;
+    }
+}
+void isEmpty() {
+    if (top == -1)
+        cout << "Stack is Empty.\n";
+    else
+        cout << "Stack is NOT Empty.\n";
+}
+void isFull() {
+    if (top == MAX-1)
+        cout << "Stack is Full.\n";
+    else
+        cout << "Stack is NOT Full.\n";
+}
+void display() {
+    if (top == -1) {
+        cout << "Stack is Empty!\n";
+    } else {
+        cout << "Stack elements (top to bottom): ";
+        for (int i = top; i>=0; i--) {
+            cout << stack[i] << " ";
+        }
+        cout << endl;
+    }
+}
+void peek() {
+    if (top == -1) {
+        cout << "Stack is Empty, nothing to peek.\n";
+    } else {
+        cout << "Top element: " << stack[top] << endl;
+    }
+}
+int main() {
+    int choice, value;
+    do {
+        cout << "\n--- Stack Menu ---\n";
+        cout << "1. Push\n2. Pop\n3. isEmpty\n4. isFull\n5. Display\n6. Peek\n7. Exit\n";
+        cout << "Enter your choice: ";
+        cin >> choice;
+
+        switch (choice) {
+            case 1:
+                cout << "Enter value to push: ";
+                cin >> value;
+                push(value);
+                break;
+            case 2:
+                pop();
+                break;
+            case 3:
+                isEmpty();
+                break;
+            case 4:
+                isFull();
+                break;
+            case 5:
+                display();
+                break;
+            case 6:
+                peek();
+                break;
+            case 7:
+                cout << "Exiting program.\n";
+                break;
+            default:
+                cout << "Invalid choice! Try again.\n";
+        }
+    } while (choice != 7);
+      return 0;
+}
