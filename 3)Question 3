@@ -1,0 +1,42 @@
+Question 3) Write a program that checks if an expression has balanced parentheses.
+
+Answer 3)
+
+#include <iostream>
+using namespace std;
+
+#define MAX 100
+
+int main() {
+    char expr[MAX], stackArr[MAX];
+    int top = -1;
+
+    cout << "Enter an expression: ";
+    cin >> expr;
+
+    for (int i=0; expr[i] != '\0'; i++) {
+        char ch = expr[i];
+
+        if (ch == '(' || ch == '{' || ch == '[') {
+            stackArr[++top] = ch;
+        }
+        else if (ch == ')' || ch == '}' || ch == ']') {
+            if (top == -1) {
+                cout << "Not Balanced" << endl;
+                return 0;
+            }
+            char last = stackArr[top--]; // pop
+            if ((ch == ')' && last != '(') ||
+                (ch == '}' && last != '{') ||
+                (ch == ']' && last != '[')) {
+                cout << "Not Balanced" << endl;
+                return 0;
+            }
+        }
+    }
+    if (top == -1)
+        cout << "Balanced" << endl;
+    else
+        cout << "Not Balanced" << endl;
+    return 0;
+}
