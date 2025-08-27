@@ -1,0 +1,49 @@
+Question 5) Write a program for the evaluation of a Postfix expression. 
+
+
+Answer 5)
+
+#include <iostream>
+#include <cstring>
+#include <cmath>
+using namespace std;
+#define MAX 100
+
+int stackArr[MAX];
+int top = -1;
+void push(int x) {
+    if (top < MAX - 1)
+        stackArr[++top] = x;
+}
+int pop() {
+    if (top == -1) return 0;
+    return stackArr[top--];
+}
+int main() {
+    char postfix[MAX];
+    cout << "Enter a postfix expression: ";
+    cin >> postfix;
+
+    for (int i = 0; postfix[i] != '\0'; i++) {
+        char c = postfix[i];
+        if (c >= '0' && c <= '9') {
+            push(c - '0');
+        }
+        else {
+            int val2 = pop();
+            int val1 = pop();
+
+            switch (c) {
+                case '+': push(val1 + val2); break;
+                case '-': push(val1 - val2); break;
+                case '*': push(val1 * val2); break;
+                case '/': push(val1 / val2); break;
+                case '^': push(pow(val1, val2)); break;
+            }
+        }
+    }
+
+    cout << "Result = " << pop() << endl;
+
+    return 0;
+}
